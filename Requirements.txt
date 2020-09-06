@@ -1,0 +1,18 @@
+check:
+run cmd
+- python -> no error
+- java -version ->no error
+- (maybe) pip -V ->no error
+
+follow needed steps:
+
+install python
+install java
+set path to java, python and python/scripts for pip
+
+follow https://github.com/chezou/tabula-py/blob/master/docs/getting_started.rst
+ - pip install tabula-py
+
+
+
+PyPDF2
