@@ -8,6 +8,7 @@
 import glob  # for searching files in dir
 from pathlib import Path
 import PyPDF2
+import random
 
 
 class Player:
@@ -30,13 +31,16 @@ for pdf in pdf_dict:
     print(str(i) + ': ' + pdf + '\n')  # removes path indicators and file ext from file name and prints the name
     i += 1
 
-f = PyPDF2.PdfFileReader(pdfPathList[0])
-ff = f.getFields()
-for key in ff:
-    print(key)
+with open(pdfPathList[0], 'rb') as pdf:
+    f = PyPDF2.PdfFileReader(pdf)
+    with open("fields.txt", 'w') as fieldsfile:
+        ff = f.getFields(None, None, fieldsfile)
+        with open("variables.txt", 'w') as file:
+            for counter, (key, variable) in enumerate(ff.items()):
+                print(counter, type(variable.value), variable.value)
+                #  print("{}: {}".format(key, variable['/V']))
+        karel = Player(ff["Character_Name"]["/V"], ff["CR_Levels_Total"]["/V"])
 
-karel = Player(ff["Character_Name"]["/V"], ff["CR_Levels_Total"]["/V"])
-
-karel.showinfo()
+        karel.showinfo()
 
 
